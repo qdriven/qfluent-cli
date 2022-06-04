@@ -22,6 +22,18 @@ Command Patter:
  APPNAME COMMAND ARG --FLAG
 ```
 
+## Commands
+
+```sh
+go get -u github.com/spf13/cobra/cobra
+go install github.com/spf13/cobra-cli@latest
+```
+
+- hugo server --port=1313
+- cobra init appname
+- cobra add cmdname
+- 
+
 ## Cli Project Generator
 
 ```shell
