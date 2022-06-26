@@ -31,3 +31,4 @@
 - https://studio.plasmic.app/projects/wU2bHAY7hyxcrseYmbfi82
 - https://github.com/youngyangyang04?tab=repositories
 - https://github.com/PatrickAlphaC?tab=repositories
+- https://github.com/rantav/go-archetype

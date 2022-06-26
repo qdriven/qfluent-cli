@@ -3,12 +3,9 @@ package gh
 import (
 	"errors"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 
-	"github.com/AlecAivazis/survey/v2"
-	"github.com/cli/go-gh"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +18,7 @@ type SearchOptions struct {
 	Language    string
 }
 
-func rootCmd() *cobra.Command {
+func ghCommand() *cobra.Command {
 	opts := &SearchOptions{}
 	cmd := &cobra.Command{
 		Use:   "gh search <query>",
@@ -140,10 +137,14 @@ func prettyPrint(i int, repo *Repository) string {
 	return out
 }
 
-func main() {
-	cmd := rootCmd()
-	if err := cmd.Execute(); err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(1)
-	}
+//func main() {
+//	cmd := rootCmd()
+//	if err := cmd.Execute(); err != nil {
+//		fmt.Fprintf(os.Stderr, "%s\n", err)
+//		os.Exit(1)
+//	}
+//}
+
+func init() {
+	rootCmd.AddCommand(ghCommand)
 }

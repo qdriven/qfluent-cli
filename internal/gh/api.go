@@ -2,7 +2,6 @@ package gh
 
 import (
 	"fmt"
-
 	"github.com/cli/go-gh"
 )
 
@@ -11,6 +10,16 @@ type Repository struct {
 	Description     string
 	StargazerCount  int
 	PrimaryLanguage struct{ Name string }
+}
+
+//meiji163/gh-search
+type SearchOptions struct {
+	Query       string
+	Interactive bool
+	Keyword     string
+	Limit       int
+	Topic       string
+	Language    string
 }
 
 func prepareQuery(opts *SearchOptions) string {
