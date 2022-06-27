@@ -1,8 +1,8 @@
 package transformer
 
 import (
-	"github.com/rantav/go-archetype/inputs"
-	"github.com/rantav/go-archetype/operations"
+	"github.com/qdriven/qfluent-cli/pkg/inputs"
+	"github.com/qdriven/qfluent-cli/pkg/operations"
 )
 
 const (

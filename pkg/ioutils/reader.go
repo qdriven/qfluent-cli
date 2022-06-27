@@ -1,4 +1,4 @@
-package io
+package ioutils
 
 import (
 	"fmt"
@@ -6,12 +6,10 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/rantav/go-archetype/types"
 )
 
 func ReadFile(path string, info os.FileInfo, sourceDir string, isIgnored func(string) bool) (
-	isDir, ignored bool, file types.File, err error,
+	isDir, ignored bool, file File, err error,
 ) {
 	isDir, err = isDirectory(info)
 	if err != nil {
@@ -30,7 +28,7 @@ func ReadFile(path string, info os.FileInfo, sourceDir string, isIgnored func(st
 	if err != nil {
 		return isDir, ignored, file, fmt.Errorf("reading file: %w", err)
 	}
-	file = types.File{
+	file = File{
 		Contents:     string(contentsBytes),
 		FullPath:     path,
 		RelativePath: relativePath,

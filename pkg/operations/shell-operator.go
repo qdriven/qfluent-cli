@@ -4,11 +4,10 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	qlog "github.com/qdriven/qfluent-cli/pkg/log"
+	"github.com/qdriven/qfluent-cli/pkg/template"
 	"os/exec"
 	"strings"
-
-	"github.com/rantav/go-archetype/log"
-	"github.com/rantav/go-archetype/template"
 )
 
 type shellOperation struct {
@@ -49,12 +48,12 @@ func executeShell(shellLine string) error {
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
-	log.Infof("Running command: %s", shellLine)
+	qlog.Infof("Running command: %s", shellLine)
 	err := cmd.Run()
 	if err != nil {
-		log.Errorf("Error running command.\n\t STDOUT: %s \n\n\t STDERR: %s", stdout.String(), stderr.String())
+		qlog.Errorf("Error running command.\n\t STDOUT: %s \n\n\t STDERR: %s", stdout.String(), stderr.String())
 		return fmt.Errorf("error running command %s: %w", shellLine, err)
 	}
-	log.Infof("Output: %s", stdout.String())
+	qlog.Infof("Output: %s", stdout.String())
 	return nil
 }

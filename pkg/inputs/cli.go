@@ -2,7 +2,6 @@ package inputs
 
 import (
 	"fmt"
-
 	"github.com/spf13/pflag"
 )
 

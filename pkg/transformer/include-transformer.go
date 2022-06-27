@@ -3,11 +3,10 @@ package transformer
 import (
 	"bufio"
 	"fmt"
+	ioutils "github.com/qdriven/qfluent-cli/pkg/ioutils"
+	qlog "github.com/qdriven/qfluent-cli/pkg/log"
+	"github.com/qdriven/qfluent-cli/pkg/template"
 	"strings"
-
-	"github.com/rantav/go-archetype/log"
-	"github.com/rantav/go-archetype/template"
-	"github.com/rantav/go-archetype/types"
 )
 
 type includeTransformer struct {
@@ -16,7 +15,7 @@ type includeTransformer struct {
 	condition string
 	// regions marker in the file
 	regionMarker string
-	files        []types.FilePattern
+	files        []ioutils.FilePattern
 	// Does this condition evaluate to true, provided the variable values?
 	truthy bool
 }
@@ -26,7 +25,7 @@ func newIncludeTransformer(spec transformationSpec) *includeTransformer {
 		name:         spec.Name,
 		condition:    spec.Condition,
 		regionMarker: spec.RegionMarker,
-		files:        types.NewFilePatterns(spec.Files),
+		files:        ioutils.NewFilePatterns(spec.Files),
 	}
 }
 
@@ -34,17 +33,17 @@ func (t *includeTransformer) GetName() string {
 	return t.name
 }
 
-func (t *includeTransformer) GetFilePatterns() []types.FilePattern {
+func (t *includeTransformer) GetFilePatterns() []ioutils.FilePattern {
 	return t.files
 }
 
-func (t *includeTransformer) Transform(input types.File) types.File {
+func (t *includeTransformer) Transform(input ioutils.File) ioutils.File {
 	if len(t.regionMarker) == 0 {
 		if t.truthy {
 			return input
 		}
 		// Discard the entire file
-		return types.File{
+		return ioutils.File{
 			Discarded:    true,
 			FullPath:     input.FullPath,
 			RelativePath: input.RelativePath,
@@ -75,7 +74,7 @@ func (t *includeTransformer) Transform(input types.File) types.File {
 		}
 	}
 	if scanner.Err() != nil {
-		log.Errorf("Error while scanning file %s: %+v.\n\n Contents: %s ...",
+		qlog.Errorf("Error while scanning file %s: %+v.\n\n Contents: %s ...",
 			scanner.Err(), input.FullPath, input.Contents[:100])
 	}
 
@@ -85,7 +84,7 @@ func (t *includeTransformer) Transform(input types.File) types.File {
 		newContents = newContents[:len(newContents)-1]
 	}
 
-	return types.File{
+	return ioutils.File{
 		Contents:     newContents,
 		FullPath:     input.FullPath,
 		RelativePath: input.RelativePath,

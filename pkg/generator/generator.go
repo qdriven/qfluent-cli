@@ -1,14 +1,13 @@
 package generator
 
 import (
+	"github.com/qdriven/qfluent-cli/pkg/inputs"
+	"github.com/qdriven/qfluent-cli/pkg/log"
+	"github.com/qdriven/qfluent-cli/pkg/transformer"
 	"os"
 	"strings"
 
 	"github.com/davecgh/go-spew/spew"
-
-	"github.com/rantav/go-archetype/inputs"
-	"github.com/rantav/go-archetype/log"
-	"github.com/rantav/go-archetype/transformer"
 )
 
 // Generate is the main entry point for code generation/transformations.

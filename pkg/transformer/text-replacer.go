@@ -1,10 +1,9 @@
 package transformer
 
 import (
+	types "github.com/qdriven/qfluent-cli/pkg/io"
+	"github.com/qdriven/qfluent-cli/pkg/template"
 	"strings"
-
-	"github.com/rantav/go-archetype/template"
-	"github.com/rantav/go-archetype/types"
 )
 
 type textReplacer struct {

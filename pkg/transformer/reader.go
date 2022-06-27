@@ -1,13 +1,12 @@
 package transformer
 
 import (
+	"github.com/qdriven/qfluent-cli/pkg/inputs"
+	types "github.com/qdriven/qfluent-cli/pkg/io"
+	"github.com/qdriven/qfluent-cli/pkg/operations"
 	"io/ioutil"
 
 	"gopkg.in/yaml.v2"
-
-	"github.com/rantav/go-archetype/inputs"
-	"github.com/rantav/go-archetype/operations"
-	"github.com/rantav/go-archetype/types"
 )
 
 func Read(transformationsFile string) (*Transformations, error) {

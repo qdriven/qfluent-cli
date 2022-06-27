@@ -3,12 +3,12 @@ package reflector
 import (
 	"errors"
 	"fmt"
+	"github.com/qdriven/qfluent-cli/pkg/reflector/tmp"
 	"reflect"
 	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tkrajina/go-reflector/reflector/tmp"
 )
 
 type Address struct {

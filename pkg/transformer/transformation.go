@@ -1,12 +1,11 @@
 package transformer
 
 import (
+	"github.com/qdriven/qfluent-cli/pkg/inputs"
+	types "github.com/qdriven/qfluent-cli/pkg/io"
+	qlog "github.com/qdriven/qfluent-cli/pkg/log"
+	"github.com/qdriven/qfluent-cli/pkg/operations"
 	"strings"
-
-	"github.com/rantav/go-archetype/inputs"
-	"github.com/rantav/go-archetype/log"
-	"github.com/rantav/go-archetype/operations"
-	"github.com/rantav/go-archetype/types"
 )
 
 type Transformations struct {
@@ -38,7 +37,7 @@ func (t Transformations) Transform(file types.File) (
 		if !matched(file.RelativePath, transformer.GetFilePatterns(), false) {
 			continue
 		}
-		log.Debugf("Applying transformer [%s] to file [%s]", transformer.GetName(), file.RelativePath)
+		qlog.Debugf("Applying transformer [%s] to file [%s]", transformer.GetName(), file.RelativePath)
 		file = transformer.Transform(file)
 	}
 	return file, nil
@@ -89,7 +88,7 @@ func matched(path string, patterns []types.FilePattern, includePrefix bool) bool
 		// Check glob match
 		matched, err := pattern.Match(path)
 		if err != nil {
-			log.Errorf("Error matching pattern %s to file %s. %+v \n", pattern.Pattern, path, err)
+			qlog.Errorf("Error matching pattern %s to file %s. %+v \n", pattern.Pattern, path, err)
 		}
 		if matched {
 			return true

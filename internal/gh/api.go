@@ -27,8 +27,8 @@ func prepareQuery(opts *SearchOptions) string {
 	if opts.Topic != "" {
 		query += fmt.Sprintf(" topic:%s", opts.Topic)
 	}
-	if opts.SearchIn != "" {
-		query += fmt.Sprintf(" in:%s", opts.SearchIn)
+	if opts.Keyword != "" {
+		query += fmt.Sprintf(" in:%s", opts.Keyword)
 	}
 	if opts.Language != "" {
 		query += fmt.Sprintf(" language:%s", opts.Language)

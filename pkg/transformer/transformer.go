@@ -3,22 +3,19 @@ package transformer
 import (
 	"errors"
 	"fmt"
+	"github.com/qdriven/qfluent-cli/pkg/ioutils"
+	qlog "github.com/qdriven/qfluent-cli/pkg/log"
+	"github.com/qdriven/qfluent-cli/pkg/operations"
 	"io"
 	"os"
 	"path/filepath"
-
-	"github.com/rantav/go-archetype/log"
-	"github.com/rantav/go-archetype/operations"
-	"github.com/rantav/go-archetype/reader"
-	"github.com/rantav/go-archetype/types"
-	"github.com/rantav/go-archetype/writer"
 )
 
 type Transformer interface {
 	GetName() string
-	GetFilePatterns() []types.FilePattern
+	GetFilePatterns() []ioutils.FilePattern
 	Template(vars map[string]string) error
-	Transform(types.File) types.File
+	Transform(ioutils.File) ioutils.File
 }
 
 func Transform(source, destination string, transformations Transformations) error {
@@ -27,7 +24,7 @@ func Transform(source, destination string, transformations Transformations) erro
 		return err
 	}
 	if !empty {
-		log.Errorf("Destination %s is not empty, aborting", destination)
+		qlog.Errorf("Destination %s is not empty, aborting", destination)
 		return errors.New("destination is not empty")
 	}
 
@@ -43,7 +40,7 @@ func Transform(source, destination string, transformations Transformations) erro
 			return fmt.Errorf("error walking to file: %w", err)
 		}
 		sourceFile := path
-		isDir, ignored, file, err := reader.ReadFile(sourceFile, info, source, transformations.IsGloballyIgnored)
+		isDir, ignored, file, err := ioutils.ReadFile(sourceFile, info, source, transformations.IsGloballyIgnored)
 		if err != nil {
 			return fmt.Errorf("error reading file: %w", err)
 		}
@@ -52,10 +49,10 @@ func Transform(source, destination string, transformations Transformations) erro
 		}
 
 		if ignored {
-			log.Debugf("Ignoring file %s", path)
+			qlog.Debugf("Ignoring file %s", path)
 		} else {
 			file, err = transformations.Transform(file)
-			if writeErr := writer.WriteFile(destination, file, info.Mode()); writeErr != nil {
+			if writeErr := ioutils.WriteFile(destination, file, info.Mode()); writeErr != nil {
 				return writeErr
 			}
 		}

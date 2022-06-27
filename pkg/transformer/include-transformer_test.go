@@ -1,10 +1,9 @@
 package transformer
 
 import (
-	"testing"
-
-	"github.com/rantav/go-archetype/types"
+	"github.com/qdriven/qfluent-cli/pkg/ioutils"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 // nolint:funlen
@@ -15,7 +14,7 @@ func TestTransform(t *testing.T) {
 			truthy:       truthy,
 			regionMarker: marker,
 		}
-		output := transformer.Transform(types.File{Contents: input})
+		output := transformer.Transform(ioutils.File{Contents: input})
 		assert.Equalf(expectedOutput, output.Contents, "Test failed, output not expected: %s", name)
 		assert.Equalf(expectedDiscarded, output.Discarded, "Test failed, discarded not expected: %s", name)
 	}

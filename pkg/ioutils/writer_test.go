@@ -1,11 +1,10 @@
-package writer
+package ioutils
 
 import (
 	"io/ioutil"
 	"os"
 	"testing"
 
-	"github.com/rantav/go-archetype/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -16,7 +15,7 @@ func TestWriteFileNoDiscard(t *testing.T) {
 	cleanup()
 	assert := assert.New(t)
 	destinationBase := tmpDir
-	file := types.File{
+	file := File{
 		Contents:     "123",
 		RelativePath: "file.txt",
 		Discarded:    false,
@@ -39,7 +38,7 @@ func TestWriteFileDiscard(t *testing.T) {
 	cleanup()
 	assert := assert.New(t)
 	destinationBase := tmpDir
-	file := types.File{
+	file := File{
 		Contents:     "123",
 		RelativePath: "discarded",
 		Discarded:    true,

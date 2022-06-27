@@ -1,8 +1,7 @@
-package io
+package ioutils
 
 import (
 	"fmt"
-
 	"github.com/gobwas/glob"
 )
 
